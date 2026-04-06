@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home2/techbdin/repos/TechBDI-s
+    - /bin/cp -R * $DEPLOYPATH
