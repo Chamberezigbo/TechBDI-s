@@ -3,6 +3,99 @@
  	easing: 'slide'
  });
 
+ (function() {
+   var teamProfiles = {
+     "profile-alexander.html": {
+       name: "Okoroafor Alexander",
+       role: "Programs Manager & Special Needs Educator",
+       image: "images/team-images/Updated Head Shot, Alexander U. Okoroafor (7).png",
+       bio: "Okoroafor Alexander designs and executes inclusive educational frameworks that meet the unique needs of Deaf learners and students with disabilities."
+     },
+     "profile-chidinma.html": {
+       name: "Chidinma Ogueri",
+       role: "Product Designer & Creative Designer",
+       image: "images/team-images/chidinma-ogueri-new.png",
+       bio: "Chidinma Ogueri is a technology-driven creative professional whose work spans product design, visual communication, poetry, digital innovation, and TechBDI administration."
+     },
+     "profile-nnenna.html": {
+       name: "Nnenna Ogbonna",
+       role: "Founder & Executive Director",
+       image: "images/team-images/Updated Headshot Nnenna M. Ogbonna.png",
+       bio: "Nnenna Ogbonna leads TechBDI's mission to bridge the digital divide for Deaf girls, the girl child, women in underrepresented communities, and persons with disabilities."
+     },
+     "profile-akpe.html": {
+       name: "Akpe Samuel",
+       role: "Frontend Engineer",
+       image: "images/team-images/rayflix.png",
+       bio: "Akpe Samuel builds accessible, responsive, and user-friendly digital experiences with modern web standards and a strong commitment to social impact."
+     },
+     "profile-okechukwu.html": {
+       name: "Okechukwu Umezurike",
+       role: "Creative Technologist & Mentor",
+       image: "images/team-images/okechukwu-umezurike.jpe",
+       bio: "Okechukwu Umezurike is a graphic designer and frontend practitioner who supports digital skills education and mentors young innovators through the Technovation Girls Challenge."
+     },
+     "profile-norah.html": {
+       name: "Norah Obinna-Ukoha",
+       role: "Young Tech Innovator & Mentor",
+       image: "images/team-images/norah-obinna-ukoha.png",
+       bio: "Norah Obinna-Ukoha is a young tech innovator and Student Ambassador who helps girls explore technology, question ideas, and develop practical app solutions."
+     },
+     "profile-deborah.html": {
+       name: "Deborah Isah",
+       role: "Impact Storyteller & Creative Lead",
+       image: "images/team-images/deborah-isah.png",
+       bio: "Deborah Isah uses storytelling, media, and creativity to amplify voices, inspire action, support girls' empowerment, and turn awareness into meaningful change."
+     },
+     "profile-innocent.html": {
+       name: "Innocent Ubadire Okoro",
+       role: "Sign Language Tutor & Mentor",
+       image: "images/team-images/innocent-ubadire-okoro.png",
+       bio: "Innocent Ubadire Okoro promotes inclusion as a sign language tutor and interpreter and mentors Deaf girls in technology and innovation."
+     }
+   };
+
+   function createTeamBioModal() {
+     var $modal = $('<div class="modal fade team-bio-modal" id="teamBioModal" tabindex="-1" role="dialog" aria-labelledby="teamBioTitle" aria-hidden="true"></div>');
+     $modal.html(
+       '<div class="modal-dialog modal-dialog-centered" role="document">' +
+         '<div class="modal-content">' +
+           '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>' +
+           '<div class="modal-body text-center">' +
+             '<img class="team-bio-avatar" src="" alt=""><h3 class="mb-2" id="teamBioTitle"></h3>' +
+             '<h6 class="text-primary mb-3" id="teamBioRole"></h6><p id="teamBioText"></p>' +
+             '<a class="btn btn-primary px-4 py-2 mt-2" id="teamBioProfileLink" href="#">View full profile</a>' +
+           '</div>' +
+         '</div>' +
+       '</div>'
+     );
+     $('body').append($modal);
+   }
+
+   $(function() {
+     if (!$('.staff').length) return;
+     createTeamBioModal();
+
+     $('.staff h3 a[href^="profile-"]').each(function(index) {
+       var $link = $(this);
+       var profile = $link.attr('href');
+       var data = teamProfiles[profile];
+       if (!data) return;
+
+       var $button = $('<button type="button" class="team-bio-link" data-toggle="modal" data-target="#teamBioModal"></button>');
+       $button.text(data.name).attr('aria-label', 'Open bio for ' + data.name);
+       $button.on('click', function() {
+         $('#teamBioTitle').text(data.name);
+         $('#teamBioRole').text(data.role);
+         $('#teamBioText').text(data.bio);
+         $('.team-bio-avatar').attr('src', data.image).attr('alt', data.name);
+         $('#teamBioProfileLink').attr('href', profile);
+       });
+       $link.replaceWith($button);
+     });
+   });
+ }());
+
 (function($) {
 
 	"use strict";
